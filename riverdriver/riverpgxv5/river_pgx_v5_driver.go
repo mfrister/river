@@ -475,12 +475,10 @@ func (l *Listener) Close(ctx context.Context) error {
 		return nil
 	}
 
-	if err := l.conn.Conn().Close(ctx); err != nil {
-		return err
-	}
+	err := l.conn.Conn().Close(ctx)
 	l.conn.Release()
 	l.conn = nil
-	return nil
+	return err
 }
 
 func (l *Listener) Connect(ctx context.Context) error {
